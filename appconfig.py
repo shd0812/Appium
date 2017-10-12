@@ -6,7 +6,7 @@ import sys
 import time
 import re
 from appium import webdriver
-
+import readconfig
 #sys.path.append("..")
 #用于解决多个手机连接问题
 #from common.mobile import get_serialno
@@ -25,22 +25,22 @@ from appium import webdriver
 # .actvity.main.GuidepageActivity	 HomeLoginActivity	 MainActivity1
 
 
+rc = readconfig.ReadConfig()
+
+print rc.getVaule('baskurl')
+
 def appium_start():
 	config = {
-		'platformName':'Android',					   #平台
-		'platformVersion':'4.4.2',					#系统版本
-		'deviceName':'emulator-5554',						 #测试设备ID
-		#'deviceName':'T8HMKVSO99999999',
-		'appPackage':'com.sxsfinance.SXS',
-		'appActivity':'.actvity.main.MainActivity1',
-		#'app':'/Users/xiaohutu/GitHub/Android-Test/com.jiuai.apk',		 #apk路径
-		#'app':'D:\com.jiuai.apk',
-		'newCommandTimeout':30,	   
-		'automationName': 'Appium',
-		'unicodeKeyboard':True,
-		#编码,可解决中文输入问题
-		'resetKeyboard':True}
-	return webdriver.Remote('http://localhost:4723/wd/hub', config)
+		'platformName':rc.getVaule('platformName'),					  
+		'platformVersion':rc.getVaule('platformVersion'),					
+		'deviceName':rc.getVaule('deviceName'),						 
+		'appPackage':rc.getVaule('appPackage'),
+		'appActivity':rc.getVaule('appActivity'),
+		'newCommandTimeout':rc.getVaule('newCommandTimeout'),	   
+		'automationName': rc.getVaule('automationName'),
+		'unicodeKeyboard':rc.getVaule('unicodeKeyboard'),
+		'resetKeyboard':rc.getVaule('resetKeyboard')}
+	return webdriver.Remote(rc.getVaule('baskurl'), config)
 #appium_start()
 
 
