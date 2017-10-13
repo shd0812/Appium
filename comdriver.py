@@ -2,7 +2,9 @@
 from appconfig import appium_start
 from subprocess import Popen
 from time import sleep
-
+from selenium import webdriver
+from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import TimeoutException
 Popen(' D:/Python/Appium/server/stopAppium.bat',shell = True)
 sleep(4)
 	
@@ -54,3 +56,37 @@ def driver_find_by_xpath(sid):
 def driver_find_by_id_keys(sid,keys):
 	driver.find_element_by_id(sid).send_keys(keys)
 	sleep(0.5)
+	
+class Element:
+
+	def __init__(self,element_name):
+		self.element_name = element_name
+		
+	def get_element(self,keys=''):
+		element = 'com.sxsfinance.SXS:id'
+		try:
+			if self.element_name.find(element) == 0:
+				if keys.strip() =='':
+					driver.find_element_by_id(self.element_name).click()
+					sleep(0.5)
+				else:
+					driver.find_element_by_id(self.element_name).clear()
+					driver.find_element_by_id(self.element_name).send_keys(keys)
+					sleep(0.5)
+				#elements = driver.find_element_by_id(self.element_name)
+				
+			else:
+				elements = driver.find_element_by_xpath(self.element_name).click()
+				sleep(0.5)
+		except TimeoutException as msg:
+			elements = driver.find_element_by_xpath(self.element_name).click()
+			print u'查找元素超时%s' % msg
+			
+	def is_exit(self):
+		try:
+			el = driver.find_element_by_id(self.element_name)
+			return el
+		except NoSuchElementException as msg:
+			print u'查找元素异常%s' % msg
+	
+	

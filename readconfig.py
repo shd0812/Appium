@@ -12,4 +12,8 @@ class ReadConfig:
 	def getVaule(self,name):
 		vaule =self.cf.get('DriverConfig',name)
 		return vaule
+	
+	def getOther(self,name):
+		vaule=self.cf.get('other',name)
+		return vaule
 
