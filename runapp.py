@@ -10,12 +10,16 @@ import unittest
 from getregist import update_db_code
 from subprocess import Popen
 import comdriver
-
+import appiumlog
 
 class TestSequenceFunctions(unittest.TestCase):
 	@classmethod
 	def setUpClass(self):
-		pass
+		self.log = comdriver.log
+		#添加开始log
+		self.log.build_start_line()
+		self.log.build_case('open app')
+		
 		
 	
 		#首页
@@ -72,12 +76,15 @@ class TestSequenceFunctions(unittest.TestCase):
 	
 	# 我的
 	def test_3my(self):
-		sleep(2)
+		
+		self.log.build_case('从首页跳转我的页面')
 		comdriver.driver.implicitly_wait(4)
 		el = comdriver.Element("//android.widget.TextView[contains(@text,'我的')]")
+		
 		el.get_element()
-		#comdriver.Element("//android.widget.TextView[contains(@text,'我的')]")
+		
 		if comdriver.Element('com.sxsfinance.SXS:id/login_btn').is_exit():
+			self.log.build_case('登录')
 			phone = raw_input('enter your phone:')
 			comdriver.Element('com.sxsfinance.SXS:id/login_phone').get_element(phone)
 			passwd = raw_input('enter your password:')
@@ -89,53 +96,66 @@ class TestSequenceFunctions(unittest.TestCase):
 	
 		sleep(2)	
 			#我的资产总额
+		self.log.build_case('我的资产总额')
 		comdriver.Element('com.sxsfinance.SXS:id/my_total_sum').get_element()
-		comdriver.Element('com.sxsfinance.SXS:id/my_set_button').get_element()
-			#设置
-		comdriver.Element('com.sxsfinance.SXS:id/my_set_button').get_element()
-			#存管按钮
-		comdriver.Element('com.sxsfinance.SXS:id/my_deposit').get_element()
-		comdriver.Element('com.sxsfinance.SXS:id/mytips_close').get_element()
-		comdriver.Element('com.sxsfinance.SXS:id/my_ca').get_element()
-		comdriver.Element('com.sxsfinance.SXS:id/mytips_close').get_element()
-		comdriver.Element('com.sxsfinance.SXS:id/my_bindcard').get_element()
-		comdriver.Element('com.sxsfinance.SXS:id/mytips_close').get_element()
-
-		comdriver.Element('com.sxsfinance.SXS:id/my_return_button').get_element()
-		#昨日利息
-		comdriver.Element('com.sxsfinance.SXS:id/my_left_top').get_element()
-		comdriver.Element('com.sxsfinance.SXS:id/my_return_button').get_element()
-		#累计利息
-		comdriver.Element('com.sxsfinance.SXS:id/my_right_top').get_element()
-		comdriver.Element('com.sxsfinance.SXS:id/my_return_button').get_element()
-		#红包
-		comdriver.Element("//android.widget.TextView[contains(@text,'红包金额')]").get_element()
-		comdriver.swipe_Left(100)
-		comdriver.swipe_Right(100)
-		comdriver.Element('com.sxsfinance.SXS:id/my_return_button').get_element()
-		#邀请
-		comdriver.Element("//android.widget.TextView[contains(@text,'邀请返现')]").get_element()
-		comdriver.Element('com.sxsfinance.SXS:id/my_return_button').get_element()
-		#小沙
-		comdriver.Element("//android.widget.TextView[contains(@text,'小沙精选记录')]").get_element()
-		comdriver.Element('com.sxsfinance.SXS:id/my_return_button').get_element()
-		#四方化缘
-		comdriver.Element("//android.widget.TextView[contains(@text,'四方化缘记录')]").get_element()
-		comdriver.Element('com.sxsfinance.SXS:id/my_return_button').get_element()
-		#债权出让
-		comdriver.Element("//android.widget.TextView[contains(@text,'债权出让')]").get_element()
-		comdriver.swipe_Left(100)
-		comdriver.swipe_Left(100)
-		comdriver.swipe_Right(100)
-		comdriver.swipe_Right(100)
-		comdriver.Element('com.sxsfinance.SXS:id/my_return_button').get_element()
-		#资金流水
 		comdriver.Element("//android.widget.TextView[contains(@text,'资金流水')]").get_element()
-		comdriver.swipe_Left(100)
-		comdriver.swipe_Left(100)
-		comdriver.swipe_Right(100)
-		comdriver.swipe_Right(100)
-		comdriver.Element('com.sxsfinance.SXS:id/my_return_button').get_element()
+		comdriver.Element('com.sxsfinance.SXS:id/my_set_button').get_element()
+		self.log.build_case('设置')
+			#设置
+		# comdriver.Element('com.sxsfinance.SXS:id/my_set_button').get_element()
+			# #存管按钮
+		# comdriver.Element('com.sxsfinance.SXS:id/my_deposit').get_element()
+		# comdriver.Element('com.sxsfinance.SXS:id/mytips_close').get_element()
+		# comdriver.Element('com.sxsfinance.SXS:id/my_ca').get_element()
+		# comdriver.Element('com.sxsfinance.SXS:id/mytips_close').get_element()
+		# comdriver.Element('com.sxsfinance.SXS:id/my_bindcard').get_element()
+		# comdriver.Element('com.sxsfinance.SXS:id/mytips_close').get_element()
+
+		# comdriver.Element('com.sxsfinance.SXS:id/my_return_button').get_element()
+		# #昨日利息
+		# self.log.build_case('昨日利息')
+		# comdriver.Element('com.sxsfinance.SXS:id/my_left_top').get_element()
+		# comdriver.Element('com.sxsfinance.SXS:id/my_return_button').get_element()
+		
+		# #累计利息
+		# self.log.build_case('累计利息')
+		# comdriver.Element('com.sxsfinance.SXS:id/my_right_top').get_element()
+		# comdriver.Element('com.sxsfinance.SXS:id/my_return_button').get_element()
+		# #红包
+		# self.log.build_case('红包')
+		# comdriver.Element("//android.widget.TextView[contains(@text,'红包金额')]").get_element()
+		# comdriver.swipe_Left(100)
+		# comdriver.swipe_Right(100)
+		# comdriver.Element('com.sxsfinance.SXS:id/my_return_button').get_element()
+		# #邀请
+		# self.log.build_case('邀请')
+		# comdriver.Element("//android.widget.TextView[contains(@text,'邀请返现')]").get_element()
+		# comdriver.Element('com.sxsfinance.SXS:id/my_return_button').get_element()
+		# #小沙
+		# self.log.build_case('小沙')
+		# comdriver.Element("//android.widget.TextView[contains(@text,'小沙精选记录')]").get_element()
+		# comdriver.Element('com.sxsfinance.SXS:id/my_return_button').get_element()
+		# #四方化缘
+		# self.log.build_case('四方化缘页面')
+		# comdriver.Element("//android.widget.TextView[contains(@text,'四方化缘记录')]").get_element()
+		# comdriver.Element('com.sxsfinance.SXS:id/my_return_button').get_element()
+		# #债权出让
+		# self.log.build_case('债权出让页面')
+		# comdriver.Element("//android.widget.TextView[contains(@text,'债权出让')]").get_element()
+		# comdriver.swipe_Left(100)
+		# comdriver.swipe_Left(100)
+		# comdriver.swipe_Right(100)
+		# comdriver.swipe_Right(100)
+		# comdriver.Element('com.sxsfinance.SXS:id/my_return_button').get_element()
+		# #资金流水
+		# self.log.build_case('资金流水页面')
+		# comdriver.Element("//android.widget.TextView[contains(@text,'资金流水')]").get_element()
+		# comdriver.swipe_Left(100)
+		# comdriver.swipe_Left(100)
+		# comdriver.swipe_Right(100)
+		# comdriver.swipe_Right(100)
+		# comdriver.Element('com.sxsfinance.SXS:id/my_return_button').get_element()
+		
 		print '333'
 			
 			
@@ -175,6 +195,8 @@ class TestSequenceFunctions(unittest.TestCase):
 	
 	@classmethod
 	def tearDownClass(self):
+		self.log.build_case('kill app')
+		self.log.build_end_line()
 		comdriver.driver.quit()
 	
 

@@ -5,11 +5,16 @@ from time import sleep
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import TimeoutException
+import appiumlog
+
+
 Popen(' D:/Python/Appium/server/stopAppium.bat',shell = True)
 sleep(4)
 	
 Popen('D:/Python/Appium/server/startAppium.bat',shell = True)
 driver= appium_start()
+
+log = appiumlog.Clog()
 
 def getSize():
 	x = driver.get_window_size()['width']
@@ -44,18 +49,6 @@ def swipe_Right(t):
 	x2=int(l[0]*0.75)
 	driver.swipe(x1,y1,x2,y1,t)
 
-
-def driver_find_by_id(sid):
-	driver.find_element_by_id(sid).click()
-	sleep(0.5)
-	
-def driver_find_by_xpath(sid):
-	driver.find_element_by_xpath(sid).click()
-	sleep(0.5)
-
-def driver_find_by_id_keys(sid,keys):
-	driver.find_element_by_id(sid).send_keys(keys)
-	sleep(0.5)
 	
 class Element:
 
@@ -65,21 +58,33 @@ class Element:
 	def get_element(self,keys=''):
 		element = 'com.sxsfinance.SXS:id'
 		try:
+			
 			if self.element_name.find(element) == 0:
-				if keys.strip() =='':
-					driver.find_element_by_id(self.element_name).click()
-					sleep(0.5)
-				else:
-					driver.find_element_by_id(self.element_name).clear()
-					driver.find_element_by_id(self.element_name).send_keys(keys)
-					sleep(0.5)
+				try:
+					el = driver.find_element_by_id(self.element_name)
+					if keys.strip() =='':
+						el.click()
+						sleep(0.5)
+					else:
+						el.clear()
+						el.send_keys(keys)
+						sleep(0.5)
+				except Exception as msg:
+					log.collect_error(msg)
+					
 				#elements = driver.find_element_by_id(self.element_name)
 				
 			else:
-				elements = driver.find_element_by_xpath(self.element_name).click()
-				sleep(0.5)
-		except TimeoutException as msg:
-			elements = driver.find_element_by_xpath(self.element_name).click()
+				try:
+					el =driver.find_element_by_xpath(self.element_name)
+					el.click()
+					sleep(0.5)
+				except Exception as msg:
+					log.collect_error(msg)
+		except Exception as msg:
+			msg = el+'查找元素超时'
+			log.collect_error(msg)
+			#elements = driver.find_element_by_xpath(self.element_name).click()
 			print u'查找元素超时%s' % msg
 			
 	def is_exit(self):
@@ -87,6 +92,8 @@ class Element:
 			el = driver.find_element_by_id(self.element_name)
 			return el
 		except NoSuchElementException as msg:
-			print u'查找元素异常%s' % msg
+			msg =  self.element_name+'查找元素异常' +str(msg)
+			log.collect_error(msg)
+			#print u'查找元素异常%s' % msg
 	
 	

@@ -20,23 +20,31 @@ class Clog:
 		fileHandler = logging.FileHandler(LOG_PATH)
 		
 		#创建一个handler，用于输出到控制台
-		ch = logging.StreamHandler()
+		#ch = logging.StreamHandler()
 		
 		#日志输出
 		fmt = '\n' + '%(asctime)s - %(filename)s:%(lineno)s	 - %(message)s'
 		formatter = logging.Formatter(fmt)
 		fileHandler.setFormatter(formatter)
-		ch.setFormatter(formatter)
+		#ch.setFormatter(formatter)
 		#把logger 添加handler
 		self.logger.addHandler(fileHandler)
-		self.logger.addHandler(ch)
-		self.logger.setLevel(logging.NOTSET)
+		#self.logger.addHandler(ch)
+		#默认的级别是logging.NOTSET, 表示处理所有的日志消息
+		self.logger.setLevel(logging.INFO)
 		
 	def build_start_line(self):
-		start_line = "----	"  + "	 START	   ----"
+		start_line = " --------------------	"  + "	 START	   --------------------"
 		self.logger.info(start_line)
+	def build_case(self,casename):
+		casename = " --------------------  " +casename+"   --------------------"
+		self.logger.info(casename)
+	def collect_error(self,casename):
+		
+		casename = " --------------------  " +str(casename)+"   --------------------"
+		self.logger.error(casename)	
 	def build_end_line(self):
-		end_line = "----  "	 + "   END	   ----"
+		end_line = " --------------------  "	 + "   END	    --------------------"
 		self.logger.info(end_line)
 	
 	def DebugMessage(self, msg):
