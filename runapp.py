@@ -101,9 +101,16 @@ class TestSequenceFunctions(unittest.TestCase):
 		comdriver.Element('com.sxsfinance.SXS:id/recharge_button').get_element()
 		sleep(3)
 		
-		#comdriver.driver.context(u'WEBVIEW_com.sxsfinance.SXS')
-		print comdriver.driver.context 
+		webview= comdriver.driver.contexts[1]
+		comdriver.driver.switch_to.context(webview)
+		sleep(2)
+		print comdriver.driver.contexts[1] 
+		
+		comdriver.driver.find_element_by_xpath('//*[@id="password"]').send_keys('123456')
+		comdriver.driver.find_element_by_xpath('//*[@id="nextButton"]').click()
 		print '2222222222222321312'
+		
+		sleep(4)
 		
 		print str(comdriver.driver.contexts) +'333333342342342343'
 			#我的资产总额
