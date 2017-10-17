@@ -27,7 +27,7 @@ import readconfig
 
 rc = readconfig.ReadConfig()
 
-print rc.getVaule('baskurl')
+#print rc.getVaule('baskurl')
 
 def appium_start():
 	config = {

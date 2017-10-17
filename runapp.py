@@ -94,13 +94,24 @@ class TestSequenceFunctions(unittest.TestCase):
 			print '444444'
 			pass
 	
-		sleep(2)	
+		sleep(2)
+		 # [u'NATIVE_APP', u'WEBVIEW_com.sxsfinance.SXS']
+		comdriver.Element('com.sxsfinance.SXS:id/my_recharge').get_element()
+		comdriver.Element('com.sxsfinance.SXS:id/recharge_edittext').get_element('100')
+		comdriver.Element('com.sxsfinance.SXS:id/recharge_button').get_element()
+		sleep(3)
+		
+		#comdriver.driver.context(u'WEBVIEW_com.sxsfinance.SXS')
+		print comdriver.driver.context 
+		print '2222222222222321312'
+		
+		print str(comdriver.driver.contexts) +'333333342342342343'
 			#我的资产总额
-		self.log.build_case('我的资产总额')
-		comdriver.Element('com.sxsfinance.SXS:id/my_total_sum').get_element()
-		comdriver.Element("//android.widget.TextView[contains(@text,'资金流水')]").get_element()
-		comdriver.Element('com.sxsfinance.SXS:id/my_set_button').get_element()
-		self.log.build_case('设置')
+		# self.log.build_case('我的资产总额')
+		# comdriver.Element('com.sxsfinance.SXS:id/my_total_sum').get_element()
+		# comdriver.Element("//android.widget.TextView[contains(@text,'资金流水')]").get_element()
+		# comdriver.Element('com.sxsfinance.SXS:id/my_set_button').get_element()
+		# self.log.build_case('设置')
 			#设置
 		# comdriver.Element('com.sxsfinance.SXS:id/my_set_button').get_element()
 			# #存管按钮

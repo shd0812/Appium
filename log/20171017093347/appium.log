@@ -1,0 +1,21 @@
+
+2017-10-17 09:33:47,805 - appiumlog.py:38	 -  --------------------		 START	   --------------------
+
+2017-10-17 09:33:47,805 - appiumlog.py:41	 -  --------------------  open app   --------------------
+
+2017-10-17 09:33:47,811 - appiumlog.py:41	 -  --------------------  从首页跳转我的页面   --------------------
+
+2017-10-17 09:33:55,726 - appiumlog.py:41	 -  --------------------  登录   --------------------
+
+2017-10-17 09:34:57,427 - appiumlog.py:45	 -  --------------------  Message: An element could not be located on the page using the given search parameters.
+   --------------------
+
+2017-10-17 09:35:02,762 - appiumlog.py:45	 -  --------------------  Message: An element could not be located on the page using the given search parameters.
+   --------------------
+
+2017-10-17 09:35:07,842 - appiumlog.py:45	 -  --------------------  Message: An element could not be located on the page using the given search parameters.
+   --------------------
+
+2017-10-17 09:35:09,056 - appiumlog.py:41	 -  --------------------  kill app   --------------------
+
+2017-10-17 09:35:09,058 - appiumlog.py:48	 -  --------------------     END	    --------------------
