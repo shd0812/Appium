@@ -96,6 +96,8 @@ class TestSequenceFunctions(unittest.TestCase):
 	
 		sleep(2)
 		 # [u'NATIVE_APP', u'WEBVIEW_com.sxsfinance.SXS']
+		 
+		self.log.build_case('充值')
 		comdriver.Element('com.sxsfinance.SXS:id/my_recharge').get_element()
 		comdriver.Element('com.sxsfinance.SXS:id/recharge_edittext').get_element('100')
 		comdriver.Element('com.sxsfinance.SXS:id/recharge_button').get_element()
@@ -109,6 +111,9 @@ class TestSequenceFunctions(unittest.TestCase):
 		comdriver.driver.find_element_by_xpath('//*[@id="password"]').send_keys('123456')
 		comdriver.driver.find_element_by_xpath('//*[@id="nextButton"]').click()
 		print '2222222222222321312'
+		webview1= comdriver.driver.contexts[0]
+		comdriver.driver.switch_to.context(webview1)
+		comdriver.Element('com.sxsfinance.SXS:id/my_set_button').get_element()
 		
 		sleep(4)
 		
@@ -185,27 +190,7 @@ class TestSequenceFunctions(unittest.TestCase):
 
 
 
-	#注册
-	# def test_regist(self):
-		# comdriver.Element("//android.widget.TextView[contains(@text,'我的')]")
-		# try:
-			# em =comdriver.driver.find_element_by_id('com.sxsfinance.SXS:id/login_btn')
-			
-			# comdriver.driver.find_element_by_id('com.sxsfinance.SXS:id/register_account').click()
-			# comdriver.driver.find_element_by_id('com.sxsfinance.SXS:id/edttxt_register_phong').send_keys('13521137773')
-			# comdriver.driver.find_element_by_id('com.sxsfinance.SXS:id/btn_phone_code').click()
-			# comdriver.driver.find_element_by_id('com.sxsfinance.SXS:id/edttxt_register_code').send_keys('111111')
-			# update_db_code()
-			# comdriver.driver.find_element_by_id('com.sxsfinance.SXS:id/btn_regiter').click()
-			# comdriver.driver.find_element_by_id('com.sxsfinance.SXS:id/act_update_psd_newps_set_password_edittext').send_keys('123456')
-			# comdriver.driver.find_element_by_id('com.sxsfinance.SXS:id/act_update_psd_newps_set_new_password_edittext').send_keys('123456')
-			# comdriver.driver.find_element_by_id('com.sxsfinance.SXS:id/act_update_newps_password_button').click()
-			# sleep(2)
-			# comdriver.driver.find_element_by_id('com.sxsfinance.SXS:id/act_gesture_verify_tvJumpOver').click()
-			# sleep(3)	
-		# except:
-			# print '3333'
-			# comdriver.driver.find_element_by_xpath("//android.widget.TextView[contains(@text,'产品')]").click()
+	
 	
 
 
