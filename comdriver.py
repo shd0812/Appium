@@ -49,6 +49,10 @@ def swipe_Right(t):
 	x2=int(l[0]*0.75)
 	driver.swipe(x1,y1,x2,y1,t)
 
+def sxs_element(element_name):
+	el = driver.find_element_by_id(element_name)
+	return el
+
 	
 class Element:
 
